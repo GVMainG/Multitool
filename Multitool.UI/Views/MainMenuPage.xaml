@@ -1,0 +1,114 @@
+<Page x:Class="Multitool.UI.Views.MainMenuPage"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+      xmlns:models="clr-namespace:Multitool.UI.Models"
+      mc:Ignorable="d"
+      Title="Multitool - Главная"
+      Background="#F5F5F5">
+
+    <Grid Margin="20">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+
+        <!-- Заголовок -->
+        <StackPanel Grid.Row="0" Margin="0,0,0,30">
+            <TextBlock Text="Multitool"
+                       FontSize="36"
+                       FontWeight="Bold"
+                       Foreground="#333333"/>
+            <TextBlock Text="Выберите инструмент для работы"
+                       FontSize="16"
+                       Foreground="#666666"
+                       Margin="0,5,0,0"/>
+        </StackPanel>
+
+        <!-- Плитки инструментов -->
+        <ItemsControl Grid.Row="1"
+                      ItemsSource="{Binding Tools}">
+            <ItemsControl.ItemsPanel>
+                <ItemsPanelTemplate>
+                    <WrapPanel Orientation="Horizontal"/>
+                </ItemsPanelTemplate>
+            </ItemsControl.ItemsPanel>
+            <ItemsControl.ItemTemplate>
+                <DataTemplate DataType="{x:Type models:ToolDescriptor}">
+                    <Border Width="200"
+                            Height="180"
+                            Margin="10"
+                            Background="White"
+                            CornerRadius="10"
+                            BorderBrush="#E0E0E0"
+                            BorderThickness="1"
+                            Cursor="Hand">
+                        <Border.Style>
+                            <Style TargetType="Border">
+                                <Setter Property="Effect">
+                                    <Setter.Value>
+                                        <DropShadowEffect BlurRadius="10"
+                                                          ShadowDepth="2"
+                                                          Opacity="0.1"/>
+                                    </Setter.Value>
+                                </Setter>
+                                <Style.Triggers>
+                                    <Trigger Property="IsMouseOver" Value="True">
+                                        <Setter Property="Effect">
+                                            <Setter.Value>
+                                                <DropShadowEffect BlurRadius="20"
+                                                                  ShadowDepth="4"
+                                                                  Opacity="0.3"/>
+                                            </Setter.Value>
+                                        </Setter>
+                                        <Setter Property="BorderBrush" Value="#2196F3"/>
+                                    </Trigger>
+                                </Style.Triggers>
+                            </Style>
+                        </Border.Style>
+                        <Grid Margin="20">
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="Auto"/>
+                                <RowDefinition Height="*"/>
+                                <RowDefinition Height="Auto"/>
+                            </Grid.RowDefinitions>
+
+                            <!-- Иконка -->
+                            <TextBlock Grid.Row="0"
+                                       Text="{Binding Icon}"
+                                       FontSize="48"
+                                       HorizontalAlignment="Center"
+                                       Margin="0,0,0,15"/>
+
+                            <!-- Название -->
+                            <TextBlock Grid.Row="1"
+                                       Text="{Binding Name}"
+                                       FontSize="18"
+                                       FontWeight="SemiBold"
+                                       Foreground="#333333"
+                                       TextAlignment="Center"
+                                       TextWrapping="Wrap"
+                                       VerticalAlignment="Center"/>
+
+                            <!-- Описание -->
+                            <TextBlock Grid.Row="2"
+                                       Text="{Binding Description}"
+                                       FontSize="12"
+                                       Foreground="#888888"
+                                       TextAlignment="Center"
+                                       TextWrapping="Wrap"
+                                       Margin="0,10,0,0"/>
+                        </Grid>
+
+                        <Border.InputBindings>
+                            <MouseBinding MouseAction="LeftClick"
+                                          Command="{Binding DataContext.SelectToolCommand, RelativeSource={RelativeSource AncestorType=ItemsControl}}"
+                                          CommandParameter="{Binding}"/>
+                        </Border.InputBindings>
+                    </Border>
+                </DataTemplate>
+            </ItemsControl.ItemTemplate>
+        </ItemsControl>
+    </Grid>
+</Page>

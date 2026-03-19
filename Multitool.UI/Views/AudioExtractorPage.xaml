@@ -1,0 +1,149 @@
+<Page x:Class="Multitool.UI.Views.AudioExtractorPage"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+      mc:Ignorable="d"
+      Title="Извлечение аудио"
+      Background="#F5F5F5">
+
+    <Grid Margin="20">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="Auto"/>
+        </Grid.RowDefinitions>
+
+        <!-- Заголовок с кнопкой назад -->
+        <Grid Grid.Row="0" Margin="0,0,0,20">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="Auto"/>
+                <ColumnDefinition Width="*"/>
+            </Grid.ColumnDefinitions>
+
+            <!-- Кнопка назад -->
+            <Button Grid.Column="0"
+                    Content="← Назад"
+                    Command="{Binding GoBackCommand}"
+                    ToolTip="Вернуться к главному меню"
+                    Padding="15,8"/>
+
+            <!-- Заголовок -->
+            <TextBlock Grid.Column="1"
+                       Text="Извлечение аудио из видео"
+                       FontSize="28"
+                       FontWeight="Bold"
+                       Foreground="#333333"
+                       HorizontalAlignment="Center"
+                       VerticalAlignment="Center"/>
+        </Grid>
+
+        <!-- Выбор видеофайла -->
+        <Grid Grid.Row="1">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="Auto"/>
+            </Grid.ColumnDefinitions>
+            <TextBox Grid.Column="0"
+                     Text="{Binding VideoPath, UpdateSourceTrigger=PropertyChanged}"
+                     IsReadOnly="True"
+                     ToolTip="Путь к видеофайлу"
+                     Padding="10,8"/>
+            <Button Grid.Column="1"
+                    Content="Обзор..."
+                    Command="{Binding BrowseVideoCommand}"
+                    ToolTip="Выбрать видеофайл"
+                    Padding="15,8"/>
+        </Grid>
+
+        <!-- Путь сохранения -->
+        <Grid Grid.Row="2" Margin="0,15,0,0">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="Auto"/>
+            </Grid.ColumnDefinitions>
+            <TextBox Grid.Column="0"
+                     Text="{Binding OutputPath, UpdateSourceTrigger=PropertyChanged}"
+                     IsReadOnly="True"
+                     ToolTip="Путь для сохранения аудио"
+                     Padding="10,8"/>
+            <Button Grid.Column="1"
+                    Content="Обзор..."
+                    Command="{Binding BrowseOutputCommand}"
+                    ToolTip="Выбрать путь сохранения"
+                    Padding="15,8"/>
+        </Grid>
+
+        <!-- Кнопка запуска -->
+        <Button Grid.Row="3"
+                Content="Извлечь аудио"
+                Command="{Binding ExtractCommand}"
+                HorizontalAlignment="Center"
+                Padding="30,12"
+                Margin="0,25,0,0"
+                FontSize="16"
+                Cursor="Hand"
+                IsEnabled="{Binding CanExtract}">
+            <Button.Style>
+                <Style TargetType="Button">
+                    <Setter Property="Background" Value="#2196F3"/>
+                    <Setter Property="Foreground" Value="White"/>
+                    <Setter Property="BorderThickness" Value="0"/>
+                    <Style.Triggers>
+                        <!-- Кнопка включена -->
+                        <Trigger Property="IsEnabled" Value="True">
+                            <Setter Property="Background" Value="#2196F3"/>
+                            <Setter Property="Foreground" Value="White"/>
+                        </Trigger>
+                        <!-- Наведение на включенную кнопку -->
+                        <MultiTrigger>
+                            <MultiTrigger.Conditions>
+                                <Condition Property="IsMouseOver" Value="True"/>
+                                <Condition Property="IsEnabled" Value="True"/>
+                            </MultiTrigger.Conditions>
+                            <Setter Property="Background" Value="#1976D2"/>
+                        </MultiTrigger>
+                        <!-- Нажатие на включенную кнопку -->
+                        <MultiTrigger>
+                            <MultiTrigger.Conditions>
+                                <Condition Property="IsPressed" Value="True"/>
+                                <Condition Property="IsEnabled" Value="True"/>
+                            </MultiTrigger.Conditions>
+                            <Setter Property="Background" Value="#1565C0"/>
+                        </MultiTrigger>
+                        <!-- Кнопка отключена -->
+                        <Trigger Property="IsEnabled" Value="False">
+                            <Setter Property="Background" Value="#BDBDBD"/>
+                            <Setter Property="Foreground" Value="#757575"/>
+                            <Setter Property="Cursor" Value="Arrow"/>
+                        </Trigger>
+                    </Style.Triggers>
+                </Style>
+            </Button.Style>
+        </Button>
+
+        <!-- Статус -->
+        <TextBox Grid.Row="4"
+                 Text="{Binding StatusMessage, UpdateSourceTrigger=PropertyChanged}"
+                 IsReadOnly="True"
+                 TextWrapping="Wrap"
+                 VerticalScrollBarVisibility="Auto"
+                 Background="White"
+                 BorderThickness="1"
+                 BorderBrush="#E0E0E0"
+                 Margin="0,20,0,0"
+                 Padding="15"
+                 FontFamily="Consolas"/>
+
+        <!-- StatusBar -->
+        <StatusBar Grid.Row="5" Margin="0,15,0,0" Background="Transparent">
+            <StatusBarItem>
+                <TextBlock Text="{Binding StatusMessage, StringFormat='Статус: {0}'}"
+                           Foreground="#666666"/>
+            </StatusBarItem>
+        </StatusBar>
+    </Grid>
+</Page>
