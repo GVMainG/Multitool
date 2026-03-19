@@ -1,0 +1,61 @@
+# Служебные файлы сборки
+bin/
+obj/
+[Bb]in/
+[Oo]bj/
+*.dll
+
+# Файлы Visual Studio
+*.user
+*.suo
+*.userosscache
+*.sln.docstates
+*.VSWorkspaceState.json
+*.db
+*.cache
+*.nupkg
+*.snupkg
+*.nuget.props
+*.nuget.targets
+
+# Файлы Rider/ReSharper
+.idea/
+*.sln.iml
+_ReSharper*/
+*._ReSharper*/
+*.resharper
+*.DotSettings.user
+
+# Файлы VS Code
+.vscode/
+
+# Тесты и покрытие
+[Tt]est[Rr]esult*/
+[Bb]uild[Ll]og.*
+*.coverage
+*.coveragexml
+
+# Журналы и временные файлы
+*.log
+*.tmp
+*.temp
+
+# Пользовательские настройки
+settings.json
+
+# Файлы Resharper
+*.DotSettings.user
+
+# Файлы отладки
+*.pdb
+
+# Файлы NuGet
+packages/
+*.nupkg
+
+# Служебные файлы Windows
+Thumbs.db
+Desktop.ini
+
+# Файлы macOS
+.DS_Store

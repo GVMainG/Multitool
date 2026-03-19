@@ -16,15 +16,35 @@ public partial class MainMenuViewModel : ObservableObject
 {
     private readonly INavigationService _navigationService;
     private readonly IServiceProvider _serviceProvider;
+    private readonly ISettingsService _settingsService;
 
     /// <summary>
     /// Конструктор
     /// </summary>
-    public MainMenuViewModel(INavigationService navigationService, IServiceProvider serviceProvider)
+    public MainMenuViewModel(
+        INavigationService navigationService,
+        IServiceProvider serviceProvider,
+        ISettingsService settingsService)
     {
         _navigationService = navigationService;
         _serviceProvider = serviceProvider;
-        Tools = new ObservableCollection<ToolDescriptor>
+        _settingsService = settingsService;
+
+        Tools = new ObservableCollection<ToolDescriptor>();
+        LoadTools();
+    }
+
+    /// <summary>
+    /// Список доступных инструментов
+    /// </summary>
+    public ObservableCollection<ToolDescriptor> Tools { get; }
+
+    /// <summary>
+    /// Загрузка инструментов с учётом настроек видимости
+    /// </summary>
+    private void LoadTools()
+    {
+        var allTools = new List<ToolDescriptor>
         {
             new ToolDescriptor
             {
@@ -32,7 +52,7 @@ public partial class MainMenuViewModel : ObservableObject
                 Name = "Извлечение аудио",
                 Description = "Извлечь аудио из видеофайла",
                 Icon = "🎵",
-                PageType = typeof(Views.AudioExtractorPage)
+                PageType = typeof(AudioExtractorPage)
             },
             new ToolDescriptor
             {
@@ -40,16 +60,28 @@ public partial class MainMenuViewModel : ObservableObject
                 Name = "Вакансии hh.ru",
                 Description = "Агрегация вакансий с hh.ru в JSON",
                 Icon = "📋",
-                PageType = typeof(Views.HHVacanciesPage)
+                PageType = typeof(HHVacanciesPage)
             },
-            // Здесь можно добавить другие инструменты
         };
+
+        Tools.Clear();
+        foreach (var tool in allTools)
+        {
+            tool.IsVisible = _settingsService.IsToolVisible(tool.Id);
+            if (tool.IsVisible)
+            {
+                Tools.Add(tool);
+            }
+        }
     }
 
     /// <summary>
-    /// Список доступных инструментов
+    /// Обновление списка инструментов (после изменения настроек)
     /// </summary>
-    public ObservableCollection<ToolDescriptor> Tools { get; }
+    public void RefreshTools()
+    {
+        LoadTools();
+    }
 
     /// <summary>
     /// Команда выбора инструмента

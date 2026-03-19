@@ -9,3 +9,4 @@ c:\Users\GV\Desktop\Multitool\Multitool.Core\obj\Debug\net9.0\Multitool.Core.dll
 c:\Users\GV\Desktop\Multitool\Multitool.Core\obj\Debug\net9.0\refint\Multitool.Core.dll
 c:\Users\GV\Desktop\Multitool\Multitool.Core\obj\Debug\net9.0\Multitool.Core.pdb
 c:\Users\GV\Desktop\Multitool\Multitool.Core\obj\Debug\net9.0\ref\Multitool.Core.dll
+c:\Users\GV\Desktop\Multitool\Multitool.Core\obj\Debug\net9.0\Multitool.Core.sourcelink.json

@@ -13,3 +13,4 @@ c:\Users\GV\Desktop\Multitool\Multitool.Infrastructure\obj\Debug\net9.0\Multitoo
 c:\Users\GV\Desktop\Multitool\Multitool.Infrastructure\obj\Debug\net9.0\refint\Multitool.Infrastructure.dll
 c:\Users\GV\Desktop\Multitool\Multitool.Infrastructure\obj\Debug\net9.0\Multitool.Infrastructure.pdb
 c:\Users\GV\Desktop\Multitool\Multitool.Infrastructure\obj\Debug\net9.0\ref\Multitool.Infrastructure.dll
+c:\Users\GV\Desktop\Multitool\Multitool.Infrastructure\obj\Debug\net9.0\Multitool.Infrastructure.sourcelink.json

@@ -1,20 +1,20 @@
 ﻿Multitool.UI
-1.0.0.0
+
 
 winexe
 C#
 .cs
-C:\Users\GV\Desktop\Multitool\Multitool.UI\obj\Debug\net9.0-windows\
+c:\Users\GV\Desktop\Multitool\Multitool.UI\obj\Debug\net9.0-windows\
 Multitool.UI
 none
 false
 TRACE;DEBUG;NET;NET9_0;NETCOREAPP;WINDOWS;WINDOWS7_0;NET5_0_OR_GREATER;NET6_0_OR_GREATER;NET7_0_OR_GREATER;NET8_0_OR_GREATER;NET9_0_OR_GREATER;NETCOREAPP3_0_OR_GREATER;NETCOREAPP3_1_OR_GREATER;WINDOWS7_0_OR_GREATER
-C:\Users\GV\Desktop\Multitool\Multitool.UI\App.xaml
-4862163825
+c:\Users\GV\Desktop\Multitool\Multitool.UI\App.xaml
+5-1361581312
 
-131361271615
-2301996785625
-MainWindow.xaml;Views\AudioExtractorPage.xaml;Views\HHVacanciesPage.xaml;Views\MainMenuPage.xaml;
+15-976643621
+230-1875411665
+MainWindow.xaml;Views\AudioExtractorPage.xaml;Views\HHVacanciesPage.xaml;Views\MainMenuPage.xaml;Views\SettingsPage.xaml;
 
-True
+False
 

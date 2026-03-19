@@ -31,4 +31,9 @@ public class ToolDescriptor
     /// Тип страницы для навигации
     /// </summary>
     public Type PageType { get; init; } = typeof(Page);
+
+    /// <summary>
+    /// Видимость инструмента в меню
+    /// </summary>
+    public bool IsVisible { get; set; } = true;
 }

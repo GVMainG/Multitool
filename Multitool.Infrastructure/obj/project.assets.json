@@ -105,8 +105,8 @@
         "net9.0": {
           "targetAlias": "net9.0",
           "projectReferences": {
-            "C:\\Users\\GV\\Desktop\\Multitool\\Multitool.Core\\Multitool.Core.csproj": {
-              "projectPath": "C:\\Users\\GV\\Desktop\\Multitool\\Multitool.Core\\Multitool.Core.csproj"
+            "c:\\Users\\GV\\Desktop\\Multitool\\Multitool.Core\\Multitool.Core.csproj": {
+              "projectPath": "c:\\Users\\GV\\Desktop\\Multitool\\Multitool.Core\\Multitool.Core.csproj"
             }
           }
         }

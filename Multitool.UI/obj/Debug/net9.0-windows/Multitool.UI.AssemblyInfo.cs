@@ -13,7 +13,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("Multitool.UI")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+95ebfea0357f92158455af92eef050ad008d6476")]
 [assembly: System.Reflection.AssemblyProductAttribute("Multitool.UI")]
 [assembly: System.Reflection.AssemblyTitleAttribute("Multitool.UI")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

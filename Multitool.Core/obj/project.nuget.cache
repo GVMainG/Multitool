@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "3liUiqOuo2k=",
+  "dgSpecHash": "/qHkkArE0h0=",
   "success": true,
-  "projectFilePath": "C:\\Users\\GV\\Desktop\\Multitool\\Multitool.Core\\Multitool.Core.csproj",
+  "projectFilePath": "c:\\Users\\GV\\Desktop\\Multitool\\Multitool.Core\\Multitool.Core.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\GV\\.nuget\\packages\\microsoft.netcore.app.ref\\9.0.12\\microsoft.netcore.app.ref.9.0.12.nupkg.sha512",
     "C:\\Users\\GV\\.nuget\\packages\\microsoft.windowsdesktop.app.ref\\9.0.12\\microsoft.windowsdesktop.app.ref.9.0.12.nupkg.sha512",

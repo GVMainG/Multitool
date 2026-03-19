@@ -14,17 +14,56 @@
             <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
 
-        <!-- Заголовок -->
-        <StackPanel Grid.Row="0" Margin="0,0,0,30">
-            <TextBlock Text="Multitool"
-                       FontSize="36"
-                       FontWeight="Bold"
-                       Foreground="#333333"/>
-            <TextBlock Text="Выберите инструмент для работы"
-                       FontSize="16"
-                       Foreground="#666666"
-                       Margin="0,5,0,0"/>
-        </StackPanel>
+        <!-- Заголовок и кнопка настроек -->
+        <Grid Grid.Row="0" Margin="0,0,0,30">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="Auto" />
+            </Grid.ColumnDefinitions>
+            
+            <StackPanel Grid.Column="0">
+                <TextBlock Text="Multitool"
+                           FontSize="36"
+                           FontWeight="Bold"
+                           Foreground="#333333"/>
+                <TextBlock Text="Выберите инструмент для работы"
+                           FontSize="16"
+                           Foreground="#666666"
+                           Margin="0,5,0,0"/>
+            </StackPanel>
+            
+            <Button Grid.Column="1"
+                    Content="⚙ Настройки"
+                    FontSize="14"
+                    Padding="15,8"
+                    Cursor="Hand"
+                    Click="SettingsButton_Click"
+                    Background="#E0E0E0"
+                    Foreground="#333333"
+                    BorderThickness="0">
+                <Button.Style>
+                    <Style TargetType="Button">
+                        <Setter Property="Template">
+                            <Setter.Value>
+                                <ControlTemplate TargetType="Button">
+                                    <Border Background="{TemplateBinding Background}"
+                                            CornerRadius="5"
+                                            Padding="{TemplateBinding Padding}">
+                                        <ContentPresenter HorizontalAlignment="Center" 
+                                                          VerticalAlignment="Center"/>
+                                    </Border>
+                                </ControlTemplate>
+                            </Setter.Value>
+                        </Setter>
+                        <Style.Triggers>
+                            <Trigger Property="IsMouseOver" Value="True">
+                                <Setter Property="Background" Value="#CCCCCC"/>
+                            </Trigger>
+                        </Style.Triggers>
+                    </Style>
+                </Button.Style>
+            </Button>
+        </Grid>
 
         <!-- Плитки инструментов -->
         <ItemsControl Grid.Row="1"

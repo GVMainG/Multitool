@@ -60,3 +60,6 @@ c:\Users\GV\Desktop\Multitool\Multitool.UI\obj\Debug\net9.0-windows\GeneratedInt
 c:\Users\GV\Desktop\Multitool\Multitool.UI\obj\Debug\net9.0-windows\Views\MainMenuPage.baml
 c:\Users\GV\Desktop\Multitool\Multitool.UI\obj\Debug\net9.0-windows\Views\HHVacanciesPage.baml
 c:\Users\GV\Desktop\Multitool\Multitool.UI\obj\Debug\net9.0-windows\Views\HHVacanciesPage.g.cs
+c:\Users\GV\Desktop\Multitool\Multitool.UI\obj\Debug\net9.0-windows\Views\SettingsPage.baml
+c:\Users\GV\Desktop\Multitool\Multitool.UI\obj\Debug\net9.0-windows\Views\SettingsPage.g.cs
+c:\Users\GV\Desktop\Multitool\Multitool.UI\obj\Debug\net9.0-windows\Multitool.UI.sourcelink.json

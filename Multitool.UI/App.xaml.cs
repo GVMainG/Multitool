@@ -26,16 +26,19 @@ public partial class App : Application
 
                 // Регистрация сервисов
                 services.AddSingleton<INavigationService, NavigationService>();
+                services.AddSingleton<ISettingsService, SettingsService>();
 
                 // Регистрация ViewModel
-                services.AddTransient<MainMenuViewModel>();
+                services.AddSingleton<MainMenuViewModel>();
                 services.AddTransient<AudioExtractorViewModel>();
                 services.AddTransient<HHVacanciesViewModel>();
+                services.AddTransient<SettingsViewModel>();
 
                 // Регистрация страниц
                 services.AddTransient<MainMenuPage>();
                 services.AddTransient<AudioExtractorPage>();
                 services.AddTransient<HHVacanciesPage>();
+                services.AddTransient<SettingsPage>();
 
                 // Регистрация MainWindow
                 services.AddTransient<MainWindow>();
@@ -64,8 +67,7 @@ public partial class App : Application
         mainWindow.Show();
 
         // Навигация на главную страницу меню
-        var mainMenuViewModel = GetService<MainMenuViewModel>();
-        var mainMenuPage = new MainMenuPage(mainMenuViewModel, _host.Services);
+        var mainMenuPage = new MainMenuPage(_host.Services);
         navigationService.NavigateToPage(mainMenuPage);
 
         base.OnStartup(e);
