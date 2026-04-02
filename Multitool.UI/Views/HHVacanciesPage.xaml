@@ -3,9 +3,17 @@
       xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
       xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+      xmlns:vm="clr-namespace:Multitool.UI.ViewModels"
+      xmlns:converters="clr-namespace:Multitool.UI.Converters"
       mc:Ignorable="d"
       Title="Агрегатор вакансий hh.ru"
       Background="#F5F5F5">
+    <!-- AI-Qwen2.5-Coder-32B-Instruct | 02-04-2026 | Добавлены namespace для ViewModel и конвертеров -->
+
+    <Page.Resources>
+        <!-- AI-Qwen2.5-Coder-32B-Instruct | 02-04-2026 | Конвертер для цвета фона токенов (дубликат/обычный) -->
+        <converters:DuplicateBackgroundConverter x:Key="DuplicateBackgroundConverter"/>
+    </Page.Resources>
 
     <Grid Margin="20">
         <Grid.RowDefinitions>
@@ -39,7 +47,8 @@
                        VerticalAlignment="Center"/>
         </Grid>
 
-        <!-- Ввод ID вакансий -->
+        <!-- Ввод ID вакансий с токенами -->
+        <!-- AI-Qwen2.5-Coder-32B-Instruct | 02-04-2026 | Полная переработка UI: токены с закруглёнными краями вместо текста -->
         <Grid Grid.Row="1">
             <Grid.RowDefinitions>
                 <RowDefinition Height="Auto"/>
@@ -47,27 +56,111 @@
             </Grid.RowDefinitions>
 
             <TextBlock Grid.Row="0"
-                       Text="Введите ID вакансий через запятую:"
+                       Text="Введите ID вакансий (после ввода нажмите пробел):"
                        FontSize="14"
                        Foreground="#555555"
                        Margin="0,0,0,8"/>
 
-            <TextBox Grid.Row="1"
-                     Text="{Binding VacancyIdsInput, UpdateSourceTrigger=PropertyChanged}"
-                     Padding="10,8"
-                     FontSize="14"
-                     ToolTip="Например: 130914433, 123456, 789012">
-                <TextBox.Style>
-                    <Style TargetType="TextBox">
-                        <Setter Property="BorderBrush" Value="#E0E0E0"/>
-                        <Style.Triggers>
-                            <Trigger Property="IsFocused" Value="True">
-                                <Setter Property="BorderBrush" Value="#2196F3"/>
-                            </Trigger>
-                        </Style.Triggers>
-                    </Style>
-                </TextBox.Style>
-            </TextBox>
+            <Border Grid.Row="1"
+                    Background="White"
+                    BorderBrush="#E0E0E0"
+                    BorderThickness="1"
+                    CornerRadius="4"
+                    Padding="8">
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                    </Grid.RowDefinitions>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="Auto"/>
+                    </Grid.ColumnDefinitions>
+                    
+                    <!-- Токены -->
+                    <!-- AI-Qwen2.5-Coder-32B-Instruct | 02-04-2026 | ItemsControl для отображения коллекции токенов с WrapPanel -->
+                    <ItemsControl Grid.Row="0" Grid.Column="0" ItemsSource="{Binding Tokens}">
+                        <ItemsControl.ItemsPanel>
+                            <ItemsPanelTemplate>
+                                <WrapPanel/>
+                            </ItemsPanelTemplate>
+                        </ItemsControl.ItemsPanel>
+                        <ItemsControl.ItemTemplate>
+                            <!-- AI-Qwen2.5-Coder-32B-Instruct | 02-04-2026 | Шаблон токена: Border с закруглением, фон зависит от IsDuplicate -->
+                            <DataTemplate>
+                                <Border Background="{Binding IsDuplicate, Converter={StaticResource DuplicateBackgroundConverter}}"
+                                        CornerRadius="12"
+                                        Padding="8,2"
+                                        Margin="0,0,4,4"
+                                        VerticalAlignment="Center">
+                                    <StackPanel Orientation="Horizontal" VerticalAlignment="Center">
+                                        <TextBlock Text="{Binding Text}" 
+                                                   Foreground="#333333"
+                                                   VerticalAlignment="Center"
+                                                   Margin="0,0,6,0"
+                                                   FontSize="14"/>
+                                        <!-- AI-Qwen2.5-Coder-32B-Instruct | 02-04-2026 | Кнопка удаления токена, видима всегда -->
+                                        <Button Content="✕"
+                                                Command="{Binding DataContext.RemoveTokenCommand, RelativeSource={RelativeSource AncestorType=Page}}"
+                                                CommandParameter="{Binding}"
+                                                Background="Transparent"
+                                                BorderThickness="0"
+                                                Cursor="Hand"
+                                                Padding="0,0,2,0"
+                                                FontSize="14"
+                                                Foreground="#666666"
+                                                VerticalAlignment="Center"
+                                                FontFamily="Consolas"/>
+                                    </StackPanel>
+                                </Border>
+                            </DataTemplate>
+                        </ItemsControl.ItemTemplate>
+                    </ItemsControl>
+                    
+                    <!-- Поле ввода -->
+                    <!-- AI-Qwen2.5-Coder-32B-Instruct | 02-04-2026 | TextBox для ввода с KeyBinding для Space/Enter -->
+                    <TextBox Grid.Row="1" Grid.Column="0"
+                             Text="{Binding InputText, UpdateSourceTrigger=PropertyChanged}"
+                             MinWidth="150"
+                             VerticalAlignment="Center"
+                             BorderThickness="0"
+                             Background="Transparent"
+                             Padding="4"
+                             FontSize="14"
+                             Margin="0,4,0,0">
+                        <TextBox.InputBindings>
+                            <KeyBinding Key="Space" Command="{Binding AddTokenCommand}"/>
+                            <KeyBinding Key="Enter" Command="{Binding AddTokenCommand}"/>
+                        </TextBox.InputBindings>
+                    </TextBox>
+                    
+                    <!-- Кнопка очистки -->
+                    <!-- AI-Qwen2.5-Coder-32B-Instruct | 02-04-2026 | Кнопка очистки всех токенов, скрывается при пустом списке -->
+                    <Button Grid.Row="0" Grid.RowSpan="2" Grid.Column="1"
+                            Content="✕ Все"
+                            Command="{Binding ClearTokensCommand}"
+                            ToolTip="Очистить все токены"
+                            Background="#FF5252"
+                            Foreground="White"
+                            BorderThickness="0"
+                            Padding="8,4"
+                            Margin="8,0,0,0"
+                            Cursor="Hand"
+                            VerticalAlignment="Top"
+                            FontSize="12">
+                        <Button.Style>
+                            <Style TargetType="Button">
+                                <Setter Property="Visibility" Value="Visible"/>
+                                <Style.Triggers>
+                                    <DataTrigger Binding="{Binding Tokens.Count}" Value="0">
+                                        <Setter Property="Visibility" Value="Collapsed"/>
+                                    </DataTrigger>
+                                </Style.Triggers>
+                            </Style>
+                        </Button.Style>
+                    </Button>
+                </Grid>
+            </Border>
         </Grid>
 
         <!-- Кнопки управления -->
