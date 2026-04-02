@@ -26,8 +26,9 @@ _ReSharper*/
 *.resharper
 *.DotSettings.user
 
-# Файлы VS Code
+# Файлы VS
 .vscode/
+.vs/
 
 # Тесты и покрытие
 [Tt]est[Rr]esult*/
